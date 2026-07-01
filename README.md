@@ -17,7 +17,6 @@ El objetivo principal de esta investigación es analizar el **Student Performanc
 
 ---
 
-=======
 Este repositorio contiene el proyecto transversal del curso **MCDI501: Estadística Computacional para la Toma de Decisiones** del **Magíster en Ciencias de Datos e Inteligencia Artificial** de la *Universidad Andrés Bello (UNAB)*.
 
 El objetivo principal de esta investigación es analizar el **Predict Students' Dropout and Academic Success (UCI, 2021)** 
