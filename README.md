@@ -32,19 +32,14 @@ El objetivo principal de esta investigación es analizar el **Predict Students' 
 | **Constanza Moreno Giacometto** | Integrante | [@ConstanzaM0](https://github.com/ConstanzaM0) |
 | **Yenne Sepúlveda Jerez** | Integrante | [@yennesepulveda](https://github.com/yennesepulveda) |
 
-<<<<<<< HEAD
-* **Docente:** Jean Paul Maidana
-=======
-* **Docente:** Omar Salinas Silva
->>>>>>> ada23172580a4d7399bc67dce07342731fc6fbe7
 
----
-=======
+* **Docente:** Jean Paul Maidana
+
 
 ##  Estructura del Repositorio
 
 ```text
-proyecto-grupo7-mcdi500/
+proyecto-grupo7-mcdi501/
 ├── 📂 data/
 │   ├── 📂 raw/                      # Datos originales sin modificar 
 │   │   ├── data_original.csv
