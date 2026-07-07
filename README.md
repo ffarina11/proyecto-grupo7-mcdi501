@@ -11,16 +11,12 @@
 
 ##  Descripción
 
-Este repositorio contiene el proyecto transversal del curso **MCDI500 — Programación para la ciencia de datos** del **Magíster en Ciencias de Datos e Inteligencia Artificial** de la *Universidad Andrés Bello (UNAB)*.
-
-El objetivo principal de esta investigación es analizar el **Student Performance Dataset** [(Cortez & Silva, 2008)](https://archive.ics.uci.edu/dataset/320/student+performance) para identificar y evaluar qué factores socioeconómicos y de preparación previa explican de mejor manera las diferencias en el rendimiento académico entre estudiantes de dos establecimientos educacionales portugueses.
-
----
 
 Este repositorio contiene el proyecto transversal del curso **MCDI501: Estadística Computacional para la Toma de Decisiones** del **Magíster en Ciencias de Datos e Inteligencia Artificial** de la *Universidad Andrés Bello (UNAB)*.
 
 El objetivo principal de esta investigación es analizar el **Predict Students' Dropout and Academic Success (UCI, 2021)** 
 
+---
 
 ##  Integrantes — Grupo 7
 
