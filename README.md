@@ -33,24 +33,27 @@ El objetivo principal de esta investigación es analizar el **Predict Students' 
 
 ##  Estructura del Repositorio
 
-```text
 proyecto-grupo7-mcdi501/
 ├── 📂 data/
 │   ├── 📂 raw/                      # Datos originales sin modificar 
 │   │   ├── data_original.csv
-│   ├── 📂 processed/ 
-│        ├── data_predict_binario.csv      # Dataset binarizado (Graduate vs Dropout) 
+│   └── 📂 processed/ 
+│        ├── data_predict_binario.csv          # Dataset binarizado (Graduate vs Dropout)
+│        ├── resultados_validados_S2.csv       # Resultados consolidados de validación (S2)
+│        └── resultados_validados_S2.xlsx      # Versión multi-hoja (parámetros, correlaciones, convergencia MC, semillas, robustez)
 ├── 📂 notebooks/
 │   ├── S1_Predict_v4_formativa.ipynb                        # Definición del problema
 │   ├── S1_abandono_academico_grupo_7.ipynb                  # Análisis Exploratorio e Inferencial
+│   └── S2_Informe_3_grupo_7_v7_corregido.ipynb              # Validación, Simulación y Métodos de Remuestreo
+│            
 ├── 📂 src/                        # Scripts reutilizables
 │   ├── functions.py               # Pipeline funcional 
-│   ├── librerias.py              
+│   └──librerias.py       
+│       
 ├── 📂 docs/                       # Documentación complementaria e informes
 ├── 📄 .gitignore                  # Archivos ignorados por Git
 ├── 📄 README.md                   # Descripción general del proyecto
 └── 📄 requirements.txt            # Dependencias del entorno de desarrollo
-```
 
 ---
 
@@ -185,6 +188,54 @@ Se realizaron las siguientes pruebas:
 - Pruebas **Chi-cuadrado de independencia** para analizar la asociación entre variables categóricas y la variable objetivo.
 
 Los resultados obtenidos permiten identificar las variables con evidencia estadística de asociación con el abandono académico y el éxito estudiantil.
+
+---
+
+## Validación, Simulación y Métodos de Remuestreo 
+
+En esta segunda fase del proyecto se buscó **validar computacionalmente** los resultados obtenidos en la Sumativa 1 mediante técnicas de remuestreo y simulación, evitando depender únicamente de los supuestos asintóticos de los métodos paramétricos.
+
+### 1. Validación de resultados de S1 mediante bootstrap
+
+- Se recalcularon, con los mismos criterios de S1 (`ddof=1`, dataset binario), los seis parámetros de interés (medias y proporción de Dropout) que sirven de insumo al resto del análisis.
+- Se generaron **B = 10.000 remuestras bootstrap no paramétricas**, vectorizadas por bloques para eficiencia computacional.
+- Se construyeron intervalos de confianza del 95 % mediante **método percentil** y **BCa** (*bias-corrected and accelerated*), comparándolos sistemáticamente contra los IC clásicos (t de Student y Wilson) de S1.
+
+
+### 2. Validación de pruebas de hipótesis mediante permutación
+
+- Se aplicaron **tests de permutación** (10.000 permutaciones) a tres pruebas *t* de Welch clave de S1, construyendo la distribución nula exacta del estadístico sin asumir normalidad.
+- Se comparó el p-valor paramétrico (Welch) contra el p-valor de permutación para cada prueba.
+
+
+### 3. Evaluación de estabilidad de correlaciones
+
+- Se evaluó la estabilidad de **cinco correlaciones de Pearson** identificadas en la matriz de correlación de S1, mediante **IC bootstrap al 95 %** (remuestreo de pares, B = 10.000).
+- Cada correlación se clasificó como **robusta** (IC estrecho, no incluye el cero) o **inestable/nula** (IC amplio o que incluye el cero).
+
+
+### 4. Simulación Monte Carlo basada en parámetros de S1
+
+- Se diseñó un escenario de simulación para propagar la incertidumbre en la brecha de unidades curriculares aprobadas en el primer semestre entre estudiantes Graduate y Dropout, usando los parámetros estimados en S1.
+- Se ejecutó un **análisis de convergencia**: simulación piloto (5.000 iteraciones) para estimar la variabilidad, cálculo del *n* requerido para una precisión relativa objetivo (1 %), y ejecución final de 50.000 iteraciones.
+
+### 5. Análisis de robustez y sensibilidad
+
+- Se evaluó cuánto depende el resultado principal de S1 (comparación de notas del primer semestre entre Graduate y Dropout) del tratamiento de valores atípicos y de observaciones individuales influyentes.
+- Se compararon distintos tratamientos de outliers (conservar todos los registros, exclusión por IQR, entre otros), midiendo el impacto sobre el estadístico de Welch, el p-valor y el tamaño de efecto (Cohen's d).
+
+
+### 6. Consolidación de resultados validados
+
+Se consolidó un **reporte de resultados validados** (parámetros robustos, correlaciones estables, observaciones influyentes), exportado como entrada directa para la Sumativa 3:
+
+```text
+data/processed/
+├── resultados_validados_S2.csv       # Reporte consolidado de validación
+├── resultados_validados_S2.xlsx      # Versión multi-hoja (parámetros, correlaciones, convergencia MC, semillas, robustez)
+
+```
+
 
 ##  Información del Dataset
 
