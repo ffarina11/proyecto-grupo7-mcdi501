@@ -33,6 +33,7 @@ El objetivo principal de esta investigación es analizar el **Predict Students' 
 
 ##  Estructura del Repositorio
 
+```text
 proyecto-grupo7-mcdi501/
 ├── 📂 data/
 │   ├── 📂 raw/                      # Datos originales sin modificar 
@@ -54,6 +55,7 @@ proyecto-grupo7-mcdi501/
 ├── 📄 .gitignore                  # Archivos ignorados por Git
 ├── 📄 README.md                   # Descripción general del proyecto
 └── 📄 requirements.txt            # Dependencias del entorno de desarrollo
+```
 
 ---
 
