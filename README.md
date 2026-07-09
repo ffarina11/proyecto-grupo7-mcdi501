@@ -45,7 +45,7 @@ proyecto-grupo7-mcdi501/
 ├── 📂 notebooks/
 │   ├── S1_Predict_v4_formativa.ipynb                        # Definición del problema
 │   ├── S1_abandono_academico_grupo_7.ipynb                  # Análisis Exploratorio e Inferencial
-│   └── S2_Informe_3_grupo_7_v7_corregido.ipynb              # Validación, Simulación y Métodos de Remuestreo
+│   └── S2_abandono_academico_grupo_7.ipynb              # Validación, Simulación y Métodos de Remuestreo
 │            
 ├── 📂 src/                        # Scripts reutilizables
 │   ├── functions.py               # Pipeline funcional 
