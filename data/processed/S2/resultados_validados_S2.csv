@@ -1,0 +1,18 @@
+seccion;elemento;estimacion;ic95_clasico;ic95_percentil;ic95_bca;veredicto;uso_en_S3
+Parámetro (bootstrap);Media — CU 1st sem (approved);4.7915;[4.6861, 4.8968];[4.6857, 4.8948];[4.6868, 4.8972];VALIDADO (clásico ≈ percentil ≈ BCa);Parámetro confiable para modelamiento
+Parámetro (bootstrap);Media — Admission grade;127.2939;[126.8185, 127.7694];[126.8248, 127.7779];[126.8209, 127.7735];VALIDADO (clásico ≈ percentil ≈ BCa);Parámetro confiable para modelamiento
+Parámetro (bootstrap);Media — Age at enrollment;23.4612;[23.2064, 23.7159];[23.2118, 23.7168];[23.2124, 23.7176];VALIDADO (clásico ≈ percentil ≈ BCa);Parámetro confiable para modelamiento
+Parámetro (bootstrap);Proporción — Dropout;0.3915;[0.3757, 0.4074];[0.3755, 0.4072];[0.3755, 0.4072];VALIDADO (clásico ≈ percentil ≈ BCa);Parámetro confiable para modelamiento
+Parámetro (bootstrap);Media — CU 1st sem (grade);10.5349;[10.3703, 10.6994];[10.3666, 10.6981];[10.3644, 10.6946];VALIDADO (clásico ≈ percentil ≈ BCa);Parámetro confiable para modelamiento
+Parámetro (bootstrap);Media — CU 2nd sem (grade);10.0362;[9.8578, 10.2145];[9.8560, 10.2192];[9.8535, 10.2142];VALIDADO (clásico ≈ percentil ≈ BCa);Parámetro confiable para modelamiento
+Prueba de hipótesis (permutación);Welch t — Curricular units 1st sem (approved) (Graduate vs Dropout);3.6805;p Welch = 1.31e-269;p permutación = 1.00e-04;-;VALIDADO (rechazo H0 concordante);Predictor principal del modelo (alerta temprana)
+Prueba de hipótesis (permutación);Welch t — Curricular units 1st sem (grade) (Graduate vs Dropout) — prueba principal S1;31.6907;p Welch = 2.40e-175;p permutación = 1.00e-04;-;VALIDADO (rechazo H0 concordante);Nota 1er semestre: predictor complementario (colineal con approved)
+Prueba de hipótesis (permutación);Welch t — Unemployment rate (Graduate vs Dropout);0.0229;p Welch = 0.8030;p permutación = 0.7938;-;VALIDADO (no-rechazo H0 concordante);Excluir/despriorizar variables macroeconómicas
+Correlación (bootstrap);CU 1st sem (approved) ↔ CU 2nd sem (approved);0.9163;-;[0.9086, 0.9238];-;Robusta;Estable — considerar colinealidad en el modelo
+Correlación (bootstrap);CU 1st sem (grade) ↔ CU 2nd sem (grade);0.8459;-;[0.8276, 0.8642];-;Robusta;Estable — considerar colinealidad en el modelo
+Correlación (bootstrap);Previous qualification (grade) ↔ Admission grade;0.5772;-;[0.5444, 0.6095];-;Robusta;Estable — considerar colinealidad en el modelo
+Correlación (bootstrap);Age at enrollment ↔ CU 2nd sem (grade);-0.1941;-;[-0.2294, -0.1600];-;Robusta;Estable — considerar colinealidad en el modelo
+Correlación (bootstrap);Unemployment rate ↔ CU 1st sem (grade);0.0103;-;[-0.0221, 0.0430];-;NULA/INESTABLE (incluye 0);Inestable — no usar como predictor
+Monte Carlo;Brecha simulada — Curricular units 1st sem (approved) (Graduate - Dropout);3.681;IC 95% MC de la media = [3.6802, 3.6818];P2,5%-P97,5% de Δ = [3.4964, 3.8638];-;"Convergida (n requerido = 26; EE MC = 4.19e-04)";Brecha de unidades aprobadas: insumo para reglas de alerta temprana
+Robustez;Curricular units 1st sem (grade): contraste bajo 4 tratamientos de outliers;1.2467;d original = 1.247 | IQR excl. = 0.793 | winsor = 1.324 | recorte 5% = 1.539;rechazo de H0 en los 4 tratamientos (p <= 1e-73, ver tabla_rob);-;"DECISIÓN ROBUSTA; magnitud depende del tratamiento de los ceros";Conservar notas 0 como señal (indicador 'sin evaluaciones'), no eliminarlas
+Robustez;Jackknife — diferencia de medias Curricular units 1st sem (grade);5.387;máx cambio absoluto = 0.007566 (0.140%);P95 |cambio| = 0.005110;-;"Ninguna observación domina; sensibilidad es grupal (bloque de ceros)";No se requiere tratamiento especial de observaciones individuales
