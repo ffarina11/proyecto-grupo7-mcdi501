@@ -45,13 +45,15 @@ proyecto-grupo7-mcdi501/
 ├── 📂 notebooks/
 │   ├── S1_Predict_v4_formativa.ipynb                        # Definición del problema
 │   ├── S1_abandono_academico_grupo_7.ipynb                  # Análisis Exploratorio e Inferencial
-│   └── S2_abandono_academico_grupo_7.ipynb              # Validación, Simulación y Métodos de Remuestreo
+│   ├── S2_abandono_academico_grupo_7.ipynb                  # Validación, Simulación y Métodos de Remuestreo
+│   └── S3_modelamiento_integrado_grupo_7_v1.ipynb  # Imputación, Modelamiento y Evaluación (integra S1→S2→S3)
 │            
 ├── 📂 src/                        # Scripts reutilizables
 │   ├── functions.py               # Pipeline funcional 
 │   └──librerias.py       
 │       
 ├── 📂 docs/                       # Documentación complementaria e informes
+│   
 ├── 📄 .gitignore                  # Archivos ignorados por Git
 ├── 📄 README.md                   # Descripción general del proyecto
 └── 📄 requirements.txt            # Dependencias del entorno de desarrollo
@@ -238,6 +240,38 @@ data/processed/
 
 ```
 
+
+## Modelamiento Predictivo e Integración de Resultados (S3)
+
+En esta tercera y última fase se **integraron los hallazgos validados en S2** para construir, seleccionar y evaluar un modelo predictivo de abandono académico, cerrando el ciclo S1 → S2 → S3 como un único proyecto (y no como tres trabajos independientes).
+
+### 1. Estrategia de imputación
+
+- El dataset no presenta valores faltantes, por lo que se simuló un escenario **MAR (Missing At Random)** controlado sobre la nota de admisión (probabilidad de faltante dependiente de la edad), con el fin de ejercitar y medir el desempeño de distintas estrategias de imputación.
+- Se compararon tres estrategias —eliminación de registros, imputación por media e imputación por regresión— y se seleccionó **imputación por regresión**, por ser la que mejor preserva la distribución original y las correlaciones entre variables.
+
+### 2. Construcción de modelos logísticos
+
+Se construyeron **tres modelos de regresión logística** con lógicas de selección de variables distintas:
+
+- **M1 — Correlaciones S1/S2:** variables priorizadas por la evidencia sustantiva y la estabilidad validada en S2 (alerta temprana, con información disponible al cierre del primer semestre).
+- **M2 — Stepwise:** selección automática por AIC.
+- **M3 — AIC/BIC:** mejor subconjunto según criterios de información.
+
+La conexión con S2 fue explícita: se usaron las variables estables identificadas en esa fase, se trató la colinealidad del bloque de rendimiento conservando una sola variable en M1, y se reaplicó la técnica de bootstrap de S2 sobre los coeficientes del modelo final.
+
+### 3. Evaluación y selección del modelo final
+
+- Se compararon los tres modelos con **accuracy, precision, recall, F1 y AUC** sobre conjunto de test.
+- Aunque M2 y M3 obtienen un AUC ligeramente superior, dependen de información del segundo semestre (que se conoce tarde para poder intervenir). Se seleccionó **M1** como modelo final por ser el único que usa exclusivamente información del primer semestre, con una pérdida mínima de desempeño (AUC ≈ 0,91) a cambio de mantener el modelo accionable a tiempo.
+- Se analizaron la **curva ROC** y la **matriz de confusión**, priorizando el recall por sobre la accuracy, dado que el falso negativo (un desertor no detectado) es el error de mayor costo en el contexto de alerta temprana.
+- Se evaluó la **estabilidad del modelo final** reaplicando bootstrap (10.000 remuestras) sobre sus coeficientes, confirmando que todos los efectos mantienen signo y significancia.
+
+### 4. Resultados e integración final
+
+- El modelo final identifica como factores decisivos: **estar al día en aranceles, la cantidad de unidades curriculares aprobadas en el primer semestre y no ser deudor**, respondiendo así la pregunta de investigación planteada en S1.
+- A partir de estos resultados se generaron **recomendaciones accionables** para la institución (alerta al cierre del primer semestre, monitoreo financiero en tiempo real, acompañamiento académico focalizado y apoyo prioritario a estudiantes de mayor edad), junto con las **limitaciones del estudio** (diseño observacional, una sola institución, imputación determinística) y el trabajo futuro sugerido.
+---
 
 ##  Información del Dataset
 
